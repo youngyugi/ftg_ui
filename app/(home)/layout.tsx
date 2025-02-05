@@ -34,10 +34,10 @@ export default function RootLayout({
             <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12">
               <SidebarTrigger className="m-2" />
             </header>
-
-            <div className="h-[calc(100vh-4rem)]">{children}</div>
+            
+            <div className="flex-grow">{children}</div>
           </SidebarInset>
-        </SidebarProvider>
+        </SidebarProvider> 
       </body>
     </html>
   );

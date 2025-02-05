@@ -1,13 +1,16 @@
 "use client";
 
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
+import { AreaChart, Area, XAxis, CartesianGrid, ResponsiveContainer } from "recharts";
 
 import {
   ChartContainer,
   ChartConfig,
   ChartTooltip,
   ChartTooltipContent,
-} from "../ui/chart";
+} from "@/components/ui/chart";
+
+
+
 
 const data = [
   {
@@ -104,41 +107,48 @@ const data = [
   },
   {
     hour: "23:00",
-    workingPhones: 0,
+    workingPhones: 48,
   },
 ];
 
 const chartConfig = {
   workingPhones: {
-    label: "working phones",
-    color: "#999999",
+    label: "working phones ",
   },
 } satisfies ChartConfig;
 
 const DataLineChart = () => {
   return (
-    <ChartContainer config={chartConfig} className="h-full w-full">
-      <AreaChart
-        data={data}
-        margin={{ top: 25, right: 25, bottom: 0, left: -25 }}>
-        <defs>
-          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#ccc" stopOpacity={0.9} />
-            <stop offset="95%" stopColor="#ccc" stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <Area
-          type="monotone"
-          dataKey="workingPhones"
-          stroke="var(--color-workingPhones)"
-          fill="url(#colorUv)"
-        />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="hour" />
-        <YAxis />
-        <ChartTooltip content={<ChartTooltipContent />} />
-      </AreaChart>
-    </ChartContainer>
+    <ResponsiveContainer >
+      <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
+        <AreaChart
+          accessibilityLayer 
+          data={data}
+          margin={{ top: 0, right: 0, bottom: 0, left: -25 }}
+        >
+          <Area
+            type="monotone"
+            dataKey="workingPhones"
+            stroke="var(--color-workingPhones)"
+            fill="url(#colorUv)"
+          />
+          <CartesianGrid />
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#1ed760" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#1ed760" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <XAxis
+            dataKey="hour"
+            tickLine={false}
+            tickMargin={5}
+            axisLine={false}
+          />
+          <ChartTooltip content={<ChartTooltipContent />} />
+        </AreaChart>
+      </ChartContainer>
+    </ResponsiveContainer>
   );
 };
 

@@ -38,12 +38,16 @@ export const CollapsibleMenu = ({ url }: CollapsibleMenuProps) => {
             {url.items.map((item) => {
               return (
                 <SidebarMenuSubItem key={item.title}>
-                  <SidebarMenuSubButton asChild>
-                    <a href={item.link}>
-                      {item.icon}
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuSubButton>
+                  {item.link ? (
+                    <SidebarMenuSubButton asChild>
+                      <a href={item.link}>
+                        {item.icon}
+                        <span>{item.title}</span>
+                      </a>
+                    </SidebarMenuSubButton>
+                  ) : (
+                    item.dialog
+                  )}
                 </SidebarMenuSubItem>
               );
             })}

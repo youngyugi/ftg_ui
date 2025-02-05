@@ -5,10 +5,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarGroupLabel,
-  SidebarGroupContent,
-  SidebarMenuSub,
-  SidebarMenuSubItem,
-  SidebarMenuSubButton,
+  SidebarGroupContent
 } from "../../ui/sidebar";
 
 import { type url } from "@/interfaces/url";
@@ -23,7 +20,7 @@ export const NavMain = ({ urls }: { urls: url[] }) => {
             return (
               <>
                 {url.items.length == 0 ? (
-                  <SidebarMenuItem>
+                  <SidebarMenuItem key={url.title}>
                     <SidebarMenuButton asChild>
                       <a href={url.link}>
                         {url.icon}

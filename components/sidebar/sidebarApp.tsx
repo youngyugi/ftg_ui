@@ -14,11 +14,14 @@ import {
   Boxes,
   Smartphone,
   Plus,
-  Minus,
   PenLine,
 } from "lucide-react";
 
-const urls = [
+import { url } from "@/interfaces/url";
+import { GroupDialog } from "@/components/groups/groupDialog";
+import { DeviceDialog } from "@/components/devices/deviceDialog";
+
+const urls: url[] = [
   {
     title: "Home",
     link: "/",
@@ -33,44 +36,42 @@ const urls = [
   },
   {
     title: "Devices",
-    link: "/devices",
+    link: "#",
     icon: <Smartphone />,
     items: [
       {
         title: "Add a device",
-        link: "/",
         icon: <Plus />,
-      },
-      {
-        title: "Remove a device",
-        link: "/",
-        icon: <Minus />,
+        dialog: (
+          <DeviceDialog
+            isSidebar={true}
+            title={"Add a device"}
+            icon={<Plus />}
+          />
+        ),
       },
       {
         title: "Manage devices",
-        link: "/",
+        link: "/devices",
         icon: <PenLine />,
       },
     ],
   },
   {
     title: "Groups",
-    link: "/groups",
+    link: "#",
     icon: <Boxes />,
     items: [
       {
         title: "Add a group",
-        link: "",
         icon: <Plus />,
-      },
-      {
-        title: "Remove a group",
-        link: "",
-        icon: <Minus />,
+        dialog: (
+          <GroupDialog isSidebar={true} title={"Add a group"} icon={<Plus />} />
+        ),
       },
       {
         title: "Manage groups",
-        link: "/",
+        link: "/groups",
         icon: <PenLine />,
       },
     ],
