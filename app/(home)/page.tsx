@@ -14,15 +14,15 @@ const dashboard_items: card_item[] = [
   },
   {
     title: "working phones",
-    value: 64,
+    value: 51,
   },
   {
     title: "total groups",
-    value: 8,
+    value: 4,
   },
   {
     title: "errors",
-    value: 0,
+    value: 1,
   },
 ];
 
@@ -32,9 +32,7 @@ const Home = () => {
       <div className="grid auto-rows-min gap-4 md:grid-cols-4">
         {dashboard_items.map((item) => {
           return (
-            <Card
-              key={item.title}
-              className="rounded-xl bg-muted/50 flex flex-col">
+            <Card key={item.title} className="rounded-xl flex flex-col">
               <CardHeader>
                 <CardTitle className="capitalize">{item.title}</CardTitle>
               </CardHeader>
@@ -56,7 +54,7 @@ const Home = () => {
           );
         })}
       </div>
-      <Card className="flex-grow rounded-xl bg-muted/50">
+      <Card className="flex-grow rounded-xl">
         <DataLineChart />
       </Card>
     </div>

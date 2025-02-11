@@ -18,14 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
 import { useState } from "react";
+import { groupDialogProps } from "@/interfaces/group";
 
-interface grouDialogProps {
-  isSidebar: boolean;
-  title: string;
-  icon: React.ReactElement;
-}
-
-export const GroupDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
+export const GroupDialog = ({ isSidebar, title, icon }: groupDialogProps) => {
   const [groupName, setGroupName] = useState<string>("");
 
   const handleGroupNameChange = (name: string) => {
@@ -34,10 +29,10 @@ export const GroupDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
 
   const handleSubmit = () => {
     console.log(groupName);
-
-    // implement api call to server.
-    // POST
     /*
+    implement api call to server.
+    
+    POST /api/v1/groups
     {
       "id": integer(auto generated),
       "name": string(from input label)

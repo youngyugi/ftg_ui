@@ -18,14 +18,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
 import { useState } from "react";
+import { deviceDialogProps } from "@/interfaces/device";
 
-interface grouDialogProps {
-  isSidebar: boolean;
-  title: string;
-  icon: React.ReactElement;
-}
-
-export const DeviceDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
+export const DeviceDialog = ({ isSidebar, title, icon }: deviceDialogProps) => {
   const [name, setName] = useState<string>("");
   const [imei, setImei] = useState<string>("");
 
