@@ -8,10 +8,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { SidebarMenuSubButton } from "@/components/ui/sidebar";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,7 +17,7 @@ import { SendHorizontal } from "lucide-react";
 import { useState } from "react";
 import { groupDialogProps } from "@/interfaces/group";
 
-export const GroupDialog = ({ isSidebar, title, icon }: groupDialogProps) => {
+export const GroupDialog = ({ children }: groupDialogProps) => {
   const [groupName, setGroupName] = useState<string>("");
 
   const handleGroupNameChange = (name: string) => {
@@ -42,20 +39,7 @@ export const GroupDialog = ({ isSidebar, title, icon }: groupDialogProps) => {
 
   return (
     <Dialog>
-      {isSidebar ? (
-        <SidebarMenuSubButton asChild>
-          <DialogTrigger asChild>
-            <a>
-              {icon}
-              <span>{title}</span>
-            </a>
-          </DialogTrigger>
-        </SidebarMenuSubButton>
-      ) : (
-        <DialogTrigger asChild>
-          <Button variant="outline">Share</Button>
-        </DialogTrigger>
-      )}
+      {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add a group</DialogTitle>

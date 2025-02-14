@@ -9,7 +9,13 @@ import {
   TableCell,
 } from "@/components/ui/table";
 
+import { AlertDialogTrigger } from "@/components/ui/alert-dialog";
+
+import { DeviceAddDialog } from "@/components/devices";
+import { GroupDialog, GroupEditDialog } from "@/components/groups";
+import { DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { DeleteDialog } from "@/components/utils/deleteDialog";
 /*
   - i need to create a new group
   - i need to delete an existing group 
@@ -82,10 +88,14 @@ const Groups = () => {
   return (
     <div className="p-4 pt-0 w-full h-full">
       <header className="flex justify-end">
-        <Button variant="outline">
-          Add group
-          <Plus />
-        </Button>
+        <GroupDialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">
+              Add group
+              <Plus />
+            </Button>
+          </DialogTrigger>
+        </GroupDialog>
       </header>
       <div className="mt-10 grid auto-rows-min gap-4 md:grid-cols-4">
         {data.map((group) => {
@@ -95,12 +105,24 @@ const Groups = () => {
               <div className="flex justify-between h-10">
                 <div className="capitalize">{group.name}</div>
                 <div className="md:hidden group-hover:block">
-                  <Button variant="ghost" size="icon">
-                    <Pencil />
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <Plus />
-                  </Button>
+                  <GroupEditDialog
+                    id={group.id}
+                    name={group.name}
+                    app={group.application}
+                    contentLink={group.playlist}>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <Pencil />
+                      </Button>
+                    </DialogTrigger>
+                  </GroupEditDialog>
+                  <DeviceAddDialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="icon">
+                        <Plus />
+                      </Button>
+                    </DialogTrigger>
+                  </DeviceAddDialog>
                 </div>
               </div>
               <Table>
@@ -117,12 +139,16 @@ const Groups = () => {
                         <TableCell className="font-medium">{device}</TableCell>
                         <TableCell>
                           <div className="md:hidden group-hover/item:block">
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="hover:bg-red-200">
-                              <Trash />
-                            </Button>
+                            <DeleteDialog groupId={group.id} itemImei={device}>
+                              <AlertDialogTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="hover:bg-red-200">
+                                  <Trash />
+                                </Button>
+                              </AlertDialogTrigger>
+                            </DeleteDialog>
                           </div>
                         </TableCell>
                       </TableRow>

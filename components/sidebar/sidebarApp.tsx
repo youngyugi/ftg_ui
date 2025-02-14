@@ -20,6 +20,8 @@ import {
 import { url } from "@/interfaces/url";
 import { GroupDialog } from "@/components/groups/groupDialog";
 import { DeviceDialog } from "@/components/devices/deviceDialog";
+import { DialogTrigger } from "@/components/ui/dialog";
+import { SidebarMenuSubButton } from "@/components/ui/sidebar";
 
 const urls: url[] = [
   {
@@ -43,11 +45,16 @@ const urls: url[] = [
         title: "Add a device",
         icon: <Plus />,
         dialog: (
-          <DeviceDialog
-            isSidebar={true}
-            title={"Add a device"}
-            icon={<Plus />}
-          />
+          <DeviceDialog>
+            <SidebarMenuSubButton asChild>
+              <DialogTrigger asChild>
+                <a>
+                  <Plus />
+                  <span>Add a device</span>
+                </a>
+              </DialogTrigger>
+            </SidebarMenuSubButton>
+          </DeviceDialog>
         ),
       },
       {
@@ -66,7 +73,16 @@ const urls: url[] = [
         title: "Add a group",
         icon: <Plus />,
         dialog: (
-          <GroupDialog isSidebar={true} title={"Add a group"} icon={<Plus />} />
+          <GroupDialog>
+            <SidebarMenuSubButton asChild>
+              <DialogTrigger asChild>
+                <a>
+                  <Plus />
+                  <span>Add a group</span>
+                </a>
+              </DialogTrigger>
+            </SidebarMenuSubButton>
+          </GroupDialog>
         ),
       },
       {

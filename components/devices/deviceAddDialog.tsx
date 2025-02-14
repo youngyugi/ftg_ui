@@ -1,5 +1,6 @@
 "use client";
 
+import { deviceAddDialogProps } from "@/interfaces/device";
 import {
   Dialog,
   DialogClose,
@@ -9,65 +10,47 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
 import { useState } from "react";
-import { deviceDialogProps } from "@/interfaces/device";
 
-export const DeviceDialog = ({ children }: deviceDialogProps) => {
-  const [name, setName] = useState<string>("");
+export const DeviceAddDialog = ({ children }: deviceAddDialogProps) => {
   const [imei, setImei] = useState<string>("");
 
-  const handleImeiChange = (imei: string) => {
-    setImei(imei);
-  };
-
-  const handleNameChange = (name: string) => {
-    setName(name);
+  const handleImeiChange = (newImei: string) => {
+    setImei(newImei);
   };
 
   const handleSubmit = () => {
-    console.log(imei, name);
-
-    //to dev api call
-    //POST
-    /* 
-    {
-      id: string (auto generated)
-      name: string (from input label)
-      imei: string (from input label)
-    }
-    */
+    console.log(imei);
+    /**
+     * PUT /api/v1/devices
+     * {
+     *  "imei": string
+     * }
+     */
   };
-
   return (
     <Dialog>
       {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Add a device</DialogTitle>
+          <DialogTitle>Add device to group</DialogTitle>
           <DialogDescription>
-            Create a new device that will be visualized into the list
+            insert a device imei to add it to the group
           </DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="groupName" className="sr-only">
-              Device name
+            <Label htmlFor="imei" className="sr-only">
+              Imei number
             </Label>
             <Input
-              id="deviceName"
-              placeholder="Device name"
-              onChange={(e) => {
-                handleNameChange(e.target.value);
-              }}
-            />
-            <Input
-              id="deviceIMEI"
-              placeholder="Imei"
+              id="imei"
+              value={imei}
+              placeholder="Imei number"
               onChange={(e) => {
                 handleImeiChange(e.target.value);
               }}

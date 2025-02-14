@@ -1,1 +1,2 @@
-import { GroupDialog } from "./groupDialog";
+export { GroupDialog } from "./groupDialog";
+export { GroupEditDialog } from "./groupEditDialog";

@@ -1,5 +1,11 @@
 export interface groupDialogProps {
-  isSidebar: boolean;
-  title: string;
-  icon: React.ReactElement;
+  children: React.ReactNode;
+}
+
+export interface groupEditProps {
+  id: number;
+  name: string;
+  app: string;
+  contentLink: string;
+  children: React.ReactElement;
 }
