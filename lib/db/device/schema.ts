@@ -1,0 +1,28 @@
+import { pgTable, text, foreignKey, integer } from "drizzle-orm/pg-core";
+import { group } from "../group/schema";
+
+export const device = pgTable(
+  "device",
+  {
+    id: integer().generatedAlwaysAsIdentity({
+      name: "device_id_seq",
+      startWith: 1,
+      increment: 1,
+      minValue: 1,
+      maxValue: 2147483647,
+      cache: 1,
+    }),
+    name: text().notNull(),
+    app: text(),
+    contentLink: text(),
+    groupId: integer(),
+    imei: text().primaryKey().notNull(),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.groupId],
+      foreignColumns: [group.id],
+      name: "groupId",
+    }),
+  ]
+);

@@ -8,9 +8,30 @@ export interface deviceAddDialogProps {
 
 export interface deviceEditProps {
   name: string;
-  model: string;
   imei: string;
   app: string;
   contentLink: string;
   children: React.ReactElement;
+}
+
+export interface Device {
+  name: string;
+  imei: stirng;
+  app: string | null;
+  contentLink: string | null;
+  groupId: int;
+}
+
+export interface DbDevice extends Device {
+  id: number;
+}
+
+export interface InsertDevice extends Device {}
+
+export interface UpdateDevice extends Device {
+  id: number;
+}
+
+export interface DeleteDevice {
+  id: number;
 }

@@ -9,3 +9,23 @@ export interface groupEditProps {
   contentLink: string;
   children: React.ReactElement;
 }
+
+export interface Group {
+  name: string;
+  app: string;
+  contentLink: string | null;
+}
+
+export interface DbGroup extends Group {
+  id: number;
+}
+
+export interface InsertGroup extends Group {}
+
+export interface UpdateGroup extends Group {
+  id: number;
+}
+
+export interface DeleteGroup {
+  id: number;
+}
