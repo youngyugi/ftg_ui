@@ -36,24 +36,18 @@ const apps = [
 
 export const DeviceEditDialog = ({
   name,
-  model,
   imei,
   app,
   contentLink,
   children,
 }: deviceEditProps) => {
   const [dialogName, setDialogName] = useState<string>(name);
-  const [dialogModel, setDialogModel] = useState<string>(model);
   const [dialogContentLink, setDialogContentLink] =
     useState<string>(contentLink);
   const [selectedApp, setSelectedApp] = useState<string>(app);
 
   const handleNameChange = (newName: string) => {
     setDialogName(newName);
-  };
-
-  const handleModelChange = (newModel: string) => {
-    setDialogModel(newModel);
   };
 
   const handleAppChange = (newApp: string) => {
@@ -105,17 +99,6 @@ export const DeviceEditDialog = ({
                 Device Imei
               </Label>
               <Input id="imei" value={imei} placeholder="imei" disabled />
-            </div>
-            <div>
-              <Label htmlFor="model" className="sr-only">
-                Device model
-              </Label>
-              <Input
-                id="model"
-                value={dialogModel}
-                placeholder="model"
-                onChange={(e) => handleModelChange(e.target.value)}
-              />
             </div>
             <div>
               <Separator className="my-2" />
