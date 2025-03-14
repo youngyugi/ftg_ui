@@ -5,10 +5,10 @@ import {
   foreignKey,
   integer,
 } from "drizzle-orm/pg-core";
-import { permission } from "../permission/schema";
-import { user } from "../user/schema";
+import permission from "../permission/schema";
+import user from "../user/schema";
 
-export const userpermissions = pgTable(
+const userpermissions = pgTable(
   "userpermissions",
   {
     id: serial().primaryKey().notNull(),
@@ -32,3 +32,5 @@ export const userpermissions = pgTable(
     ),
   ]
 );
+
+export default userpermissions;

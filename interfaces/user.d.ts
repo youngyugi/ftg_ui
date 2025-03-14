@@ -10,8 +10,11 @@ export interface DbUser extends User {
 
 export interface InsertUser extends User {}
 
-export interface UpdateUser extends User {
+export interface UpdateUser {
   id: number;
+  username?: string;
+  password?: string;
+  email?: string;
 }
 
 export interface DeleteUser {

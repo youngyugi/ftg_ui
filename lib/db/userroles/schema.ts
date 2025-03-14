@@ -5,8 +5,8 @@ import {
   foreignKey,
   integer,
 } from "drizzle-orm/pg-core";
-import { user } from "../user/schema";
-import { role } from "../role/schema";
+import user from "../user/schema";
+import role from "../role/schema";
 
 export const userroles = pgTable(
   "userroles",
@@ -29,3 +29,5 @@ export const userroles = pgTable(
     unique("user_roles_user_id_role_id_key").on(table.userId, table.roleId),
   ]
 );
+
+export default userroles;

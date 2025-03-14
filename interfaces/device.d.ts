@@ -30,6 +30,11 @@ export interface InsertDevice extends Device {}
 
 export interface UpdateDevice extends Device {
   id: number;
+  name?: string;
+  imei?: stirng;
+  app?: string | null;
+  contentLink?: string | null;
+  groupId?: int;
 }
 
 export interface DeleteDevice {

@@ -22,8 +22,11 @@ export interface DbGroup extends Group {
 
 export interface InsertGroup extends Group {}
 
-export interface UpdateGroup extends Group {
+export interface UpdateGroup {
   id: number;
+  name?: string;
+  app?: string;
+  contentLink?: string | null;
 }
 
 export interface DeleteGroup {

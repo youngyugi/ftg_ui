@@ -1,3 +1,7 @@
+"use server";
+
+import { auth } from "@/auth";
+import { unauthorized } from "next/navigation";
 import { Card } from "@/components/ui/card";
 import { Trash, Pencil, Plus } from "lucide-react";
 import {
@@ -84,7 +88,10 @@ const data = [
   },
 ];
 
-const Groups = () => {
+const Groups = async () => {
+  const session = await auth();
+  if (session === null) return unauthorized();
+
   return (
     <div className="p-4 pt-0 w-full h-full">
       <header className="flex justify-end">

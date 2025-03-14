@@ -1,7 +1,7 @@
 import { pgTable, text, foreignKey, integer } from "drizzle-orm/pg-core";
-import { group } from "../group/schema";
+import group from "../group/schema";
 
-export const device = pgTable(
+const device = pgTable(
   "device",
   {
     id: integer().generatedAlwaysAsIdentity({
@@ -26,3 +26,5 @@ export const device = pgTable(
     }),
   ]
 );
+
+export default device;

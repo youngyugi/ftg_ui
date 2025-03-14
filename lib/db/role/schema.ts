@@ -1,16 +1,6 @@
-import {
-  pgTable,
-  unique,
-  serial,
-  varchar,
-  text,
-  timestamp,
-  foreignKey,
-  integer,
-} from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
+import { pgTable, unique, serial, varchar, text } from "drizzle-orm/pg-core";
 
-export const role = pgTable(
+const role = pgTable(
   "role",
   {
     id: serial().primaryKey().notNull(),
@@ -19,3 +9,5 @@ export const role = pgTable(
   },
   (table) => [unique("roles_name_key").on(table.name)]
 );
+
+export default role;

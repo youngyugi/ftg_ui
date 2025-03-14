@@ -1,12 +1,12 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import {
   DbDevice,
   InsertDevice,
   UpdateDevice,
   DeleteDevice,
 } from "@/interfaces/device";
-import { device } from "./schema";
+import device from "./schema";
 
 export const getDevice = async () => {
   const device_list: DbDevice[] = await db.select().from(device);
@@ -36,13 +36,7 @@ export const insertDevice = async (request_device: InsertDevice) => {
 export const editDevice = async (request_device: UpdateDevice) => {
   const updated_device: DbDevice[] = await db
     .update(device)
-    .set({
-      name: request_device["name"],
-      imei: request_device["imei"],
-      app: request_device["app"],
-      contentLink: request_device["contentLink"],
-      groupId: request_device["groupId"],
-    })
+    .set(request_device)
     .where(eq(device.id, request_device["id"]))
     .returning();
 

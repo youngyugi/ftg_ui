@@ -1,3 +1,7 @@
+"use server";
+
+import { auth } from "@/auth";
+import { unauthorized } from "next/navigation";
 import { DeviceDialog } from "@/components/devices";
 import { Button } from "@/components/ui/button";
 import { DialogTrigger } from "@/components/ui/dialog";
@@ -20,7 +24,6 @@ const data = [
   {
     name: "phone 1",
     imei: "12359349671931",
-    model: "LG Lumia M3",
     status: "active",
     app: "inherit",
     contentLink: "",
@@ -28,7 +31,6 @@ const data = [
   {
     name: "phone 2",
     imei: "18479349671932",
-    model: "LG Lumia M3",
     status: "active",
     app: "inherit",
     contentLink: "",
@@ -36,7 +38,6 @@ const data = [
   {
     name: "phone 3",
     imei: "00919349671933",
-    model: "LG Lumia M3",
     status: "not active",
     app: "inherit",
     contentLink: "",
@@ -44,7 +45,6 @@ const data = [
   {
     name: "phone 4",
     imei: "12359390271934",
-    model: "LG Lumia M3",
     status: "not active",
     app: "spotify",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
@@ -52,7 +52,6 @@ const data = [
   {
     name: "phone 5",
     imei: "12355479671935",
-    model: "LG Lumia M3",
     status: "active",
     app: "spotify",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
@@ -60,14 +59,16 @@ const data = [
   {
     name: "phone 6",
     imei: "123591231671936",
-    model: "LG Lumia M3",
     status: "not active",
     app: "spotify",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
   },
 ];
 
-const Devices = () => {
+const Devices = async () => {
+  const session = await auth();
+  if (session === null) return unauthorized();
+
   return (
     <div className="p-4 pt-0 w-full h-full">
       <header className="flex justify-end">
@@ -99,13 +100,11 @@ const Devices = () => {
                 <TableRow key={phone.imei} className="group/item h-14">
                   <TableCell className="font-medium">{phone.name}</TableCell>
                   <TableCell className="font-medium">{phone.imei}</TableCell>
-                  <TableCell className="font-medium">{phone.model}</TableCell>
                   <TableCell className="font-medium">{phone.status}</TableCell>
                   <TableCell className="w-1/12">
                     <div className="md:hidden group-hover/item:block">
                       <DeviceEditDialog
                         name={phone.name}
-                        model={phone.model}
                         imei={phone.imei}
                         app={phone.app}
                         contentLink={phone.contentLink}>

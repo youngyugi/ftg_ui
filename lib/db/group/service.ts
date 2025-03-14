@@ -1,12 +1,12 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/lib/db";
+import db from "@/lib/db";
 import {
   DbGroup,
   InsertGroup,
   UpdateGroup,
   DeleteGroup,
 } from "@/interfaces/group";
-import { group } from "./schema";
+import group from "./schema";
 
 export const getGroup = async () => {
   const group_list: DbGroup[] = await db.select().from(group);
@@ -34,11 +34,7 @@ export const insertGroup = async (request_group: InsertGroup) => {
 export const editGroup = async (request_group: UpdateGroup) => {
   const updated_group: DbGroup[] = await db
     .update(group)
-    .set({
-      name: request_group["name"],
-      app: request_group["app"],
-      contentLink: request_group["contentLink"],
-    })
+    .set(request_group)
     .where(eq(group.id, request_group["id"]))
     .returning();
 

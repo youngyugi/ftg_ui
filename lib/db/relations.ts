@@ -1,14 +1,12 @@
 import { relations } from "drizzle-orm/relations";
-import {
-  role,
-  rolepermissions,
-  permission,
-  user,
-  userpermissions,
-  userroles,
-  group,
-  device,
-} from "./schema";
+import user from "./user/schema";
+import group from "./group/schema";
+import device from "./device/schema";
+import permission from "./permission/schema";
+import role from "./role/schema";
+import rolepermissions from "./rolepermissions/schema";
+import userpermissions from "./userpermissions/schema";
+import userroles from "./userroles/schema";
 
 export const rolepermissionsRelations = relations(
   rolepermissions,

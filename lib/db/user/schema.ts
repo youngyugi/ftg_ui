@@ -1,6 +1,6 @@
 import { pgTable, unique, serial, varchar, text } from "drizzle-orm/pg-core";
 
-export const user = pgTable(
+const user = pgTable(
   "user",
   {
     id: serial().primaryKey().notNull(),
@@ -13,3 +13,5 @@ export const user = pgTable(
     unique("users_email_key").on(table.email),
   ]
 );
+
+export default user;

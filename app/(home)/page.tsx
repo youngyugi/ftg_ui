@@ -1,5 +1,8 @@
-import DataLineChart from "@/components/chart";
+"use server";
 
+import { auth } from "@/auth";
+import { unauthorized } from "next/navigation";
+import DataLineChart from "@/components/chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface card_item {
@@ -26,7 +29,10 @@ const dashboard_items: card_item[] = [
   },
 ];
 
-const Home = () => {
+const Home = async () => {
+  const session = await auth();
+  if (session === null) return unauthorized();
+
   return (
     <div className="flex flex-1 flex-col gap-4 p-4 pt-0 h-full">
       <div className="grid auto-rows-min gap-4 md:grid-cols-4">

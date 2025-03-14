@@ -1,4 +1,7 @@
 import type { Metadata, Viewport } from "next";
+
+import { auth } from "@/auth";
+import { unauthorized } from "next/navigation";
 import {
   SidebarProvider,
   SidebarTrigger,
@@ -20,11 +23,18 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-export default function RootLayout({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
-}>) {
+}>) => {
+  const session = await auth();
+  if (session === null)
+    return (
+      <html lang="en">
+        <body className="font-sans w-screen h-screen">{children}</body>
+      </html>
+    );
   return (
     <html lang="en">
       <body className="font-sans w-screen h-screen">
@@ -41,4 +51,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

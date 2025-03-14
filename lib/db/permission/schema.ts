@@ -1,16 +1,6 @@
-import {
-  pgTable,
-  unique,
-  serial,
-  varchar,
-  text,
-  timestamp,
-  foreignKey,
-  integer,
-} from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
+import { pgTable, unique, serial, varchar, text } from "drizzle-orm/pg-core";
 
-export const permission = pgTable(
+const permission = pgTable(
   "permission",
   {
     id: serial().primaryKey().notNull(),
@@ -19,3 +9,5 @@ export const permission = pgTable(
   },
   (table) => [unique("permissions_name_key").on(table.name)]
 );
+
+export default permission;
