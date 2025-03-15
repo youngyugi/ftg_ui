@@ -87,20 +87,26 @@ const Devices = async () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Imei</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="w-3/12 md:w-1/4">Name</TableHead>
+              <TableHead className="w-1/12 md:w-1/4">Imei</TableHead>
+              <TableHead className="w-3/12 md:w-1/4">Status</TableHead>
+              <TableHead className="w-5/12 md:w-1/12">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {data.map((phone) => {
               return (
                 <TableRow key={phone.imei} className="group/item h-14">
-                  <TableCell className="font-medium">{phone.name}</TableCell>
-                  <TableCell className="font-medium">{phone.imei}</TableCell>
-                  <TableCell className="font-medium">{phone.status}</TableCell>
-                  <TableCell className="md:w-1/12">
+                  <TableCell className="font-medium md:text-sm max-w-xs text-ellipsis whitespace-nowrap overflow-hidden">
+                    {phone.name}
+                  </TableCell>
+                  <TableCell className="font-medium md:text-sm">
+                    {phone.imei}
+                  </TableCell>
+                  <TableCell className="font-medium md:text-sm">
+                    {phone.status}
+                  </TableCell>
+                  <TableCell className="p-0">
                     <div className="md:hidden group-hover/item:block">
                       <DeviceEditDialog
                         name={phone.name}
