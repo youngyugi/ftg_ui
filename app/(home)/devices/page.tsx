@@ -8,6 +8,8 @@ import { DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 import { Trash } from "lucide-react";
 import { Pencil } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import {
   Table,
   TableHeader,
@@ -87,9 +89,9 @@ const Devices = async () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-3/12 md:w-1/4">Name</TableHead>
-              <TableHead className="w-1/12 md:w-1/4">Imei</TableHead>
-              <TableHead className="w-3/12 md:w-1/4">Status</TableHead>
+              <TableHead className="md:w-1/4">Name</TableHead>
+              <TableHead className="md:w-1/4">Imei</TableHead>
+              <TableHead className="md:w-1/4">Status</TableHead>
               <TableHead className="w-5/12 md:w-1/12">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -103,8 +105,12 @@ const Devices = async () => {
                   <TableCell className="font-medium md:text-sm">
                     {phone.imei}
                   </TableCell>
-                  <TableCell className="font-medium md:text-sm">
-                    {phone.status}
+                  <TableCell className="text-center font-medium md:text-sm">
+                    {phone.status === "active" ? (
+                      <CircleCheck color="green" size={20} />
+                    ) : (
+                      <CircleX color="red" size={20} />
+                    )}
                   </TableCell>
                   <TableCell className="p-0">
                     <div className="md:hidden group-hover/item:block">
