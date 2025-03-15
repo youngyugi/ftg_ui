@@ -148,7 +148,7 @@ export const DeviceEditDialog = ({
           <Button
             type="submit"
             size="default"
-            className="px-3"
+            className="px-3 mb-2"
             onClick={handleSubmit}>
             <span className="sr-only">send</span>
             <SendHorizontal />

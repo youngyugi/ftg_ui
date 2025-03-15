@@ -30,7 +30,7 @@ export const DeleteDialog = ({
   return (
     <AlertDialog>
       {children}
-      <AlertDialogContent className="sm:max-w-md justify-center w-1/5">
+      <AlertDialogContent className="justify-center sm:max-w-md">
         <AlertDialogHeader>
           <AlertDialogTitle>Confirm item remove</AlertDialogTitle>
           <AlertDialogDescription>

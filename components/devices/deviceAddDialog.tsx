@@ -57,7 +57,7 @@ export const DeviceAddDialog = ({ children }: deviceAddDialogProps) => {
             />
           </div>
         </div>
-        <DialogFooter className="sm:justify-start">
+        <DialogFooter>
           <DialogClose asChild>
             <Button type="button" variant="secondary">
               Close
@@ -66,7 +66,7 @@ export const DeviceAddDialog = ({ children }: deviceAddDialogProps) => {
           <Button
             type="submit"
             size="default"
-            className="px-3"
+            className="px-3 mb-2"
             onClick={handleSubmit}>
             <span className="sr-only">send</span>
             <SendHorizontal />

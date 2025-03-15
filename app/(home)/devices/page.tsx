@@ -89,7 +89,6 @@ const Devices = async () => {
             <TableRow>
               <TableHead>Name</TableHead>
               <TableHead>Imei</TableHead>
-              <TableHead>Model</TableHead>
               <TableHead>Status</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
@@ -101,7 +100,7 @@ const Devices = async () => {
                   <TableCell className="font-medium">{phone.name}</TableCell>
                   <TableCell className="font-medium">{phone.imei}</TableCell>
                   <TableCell className="font-medium">{phone.status}</TableCell>
-                  <TableCell className="w-1/12">
+                  <TableCell className="md:w-1/12">
                     <div className="md:hidden group-hover/item:block">
                       <DeviceEditDialog
                         name={phone.name}
