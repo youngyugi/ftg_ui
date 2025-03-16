@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const UnauthorizedPage = () => {
   return (
-    <main className="w-full h-full flex justify-center items-center ">
+    <main className="w-full h-full md:flex md:justify-center md:items-center ">
       <div>
         <Image
           src="/not-auth.png"
@@ -11,8 +11,8 @@ const UnauthorizedPage = () => {
           alt="401 unauthorized"
         />
       </div>
-      <div className="text-center ml-10">
-        <p className="text-6xl mb-10">401</p>
+      <div className="text-center md:ml-10 sm:mt-10">
+        <p className="text-6xl md:mb-10 mb-5">401</p>
         <p className="text-xl">Please log in to access this page</p>
       </div>
     </main>

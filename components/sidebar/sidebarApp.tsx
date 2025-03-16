@@ -22,6 +22,7 @@ import { GroupDialog } from "@/components/groups/groupDialog";
 import { DeviceDialog } from "@/components/devices/deviceDialog";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { SidebarMenuSubButton } from "@/components/ui/sidebar";
+import { Session } from "next-auth";
 
 const urls: url[] = [
   {
@@ -94,7 +95,7 @@ const urls: url[] = [
   },
 ];
 
-const SidebarApp = () => {
+const SidebarApp = ({ session }: { session: Session }) => {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -104,7 +105,7 @@ const SidebarApp = () => {
         <NavMain urls={urls} />
       </SidebarContent>
       <SidebarFooter>
-        <NavFooter />
+        <NavFooter session={session} />
       </SidebarFooter>
     </Sidebar>
   );
