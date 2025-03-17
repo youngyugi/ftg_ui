@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
 import { auth } from "@/auth";
-import { unauthorized } from "next/navigation";
 import {
   SidebarProvider,
   SidebarTrigger,
