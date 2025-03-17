@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-
-import "../globals.css";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Fast2Grow",
@@ -21,9 +18,6 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const session = await auth();
-  if (session !== null) return redirect("/");
-
   return (
     <html lang="en">
       <body className="font-sans w-screen h-screen">{children}</body>
