@@ -27,13 +27,13 @@ import { Session } from "next-auth";
 const urls: url[] = [
   {
     title: "Home",
-    link: "/",
+    link: "/home",
     icon: <House />,
     items: [],
   },
   {
     title: "Metrics",
-    link: "/metrics",
+    link: "/home/metrics",
     icon: <ChartSpline />,
     items: [],
   },
@@ -60,7 +60,7 @@ const urls: url[] = [
       },
       {
         title: "Manage devices",
-        link: "/devices",
+        link: "/home/devices",
         icon: <PenLine />,
       },
     ],
@@ -88,7 +88,7 @@ const urls: url[] = [
       },
       {
         title: "Manage groups",
-        link: "/groups",
+        link: "/home/groups",
         icon: <PenLine />,
       },
     ],

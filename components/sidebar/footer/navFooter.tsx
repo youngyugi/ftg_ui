@@ -12,7 +12,7 @@ export const NavFooter = ({ session }: { session: Session }) => {
     <SidebarMenu>
       <SidebarMenuItem>
         <SidebarMenuButton asChild>
-          <a href="/settings">
+          <a href="/home/settings">
             <Settings />
             <span>Settings</span>
           </a>
@@ -21,7 +21,7 @@ export const NavFooter = ({ session }: { session: Session }) => {
       <SidebarMenuItem>
         {session === null ? (
           <SidebarMenuButton asChild onClick={logout}>
-            <a href="/login">
+            <a href="/">
               <LogIn />
               <span>LogIn</span>
             </a>

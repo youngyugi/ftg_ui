@@ -35,7 +35,7 @@ const LoginForm = () => {
       if (!!response.error) {
         setError(true);
       } else {
-        router.push("/");
+        router.push("/home");
       }
     } catch (e) {
       setError(true);

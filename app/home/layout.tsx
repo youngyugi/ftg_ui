@@ -14,7 +14,7 @@ const HomeLayout = async ({
   children: React.ReactNode;
 }>) => {
   const session = await auth();
-  if (session === null) return { children };
+  if (session === null) return <section>{children}</section>;
 
   return (
     <SidebarProvider defaultOpen>
