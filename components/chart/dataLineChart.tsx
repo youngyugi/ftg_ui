@@ -18,99 +18,99 @@ import {
 const data = [
   {
     hour: "00:00",
-    workingPhones: 10,
+    workingPhones: 6,
   },
   {
     hour: "01:00",
-    workingPhones: 32,
+    workingPhones: 5,
   },
   {
     hour: "02:00",
-    workingPhones: 41,
+    workingPhones: 4,
   },
   {
     hour: "03:00",
-    workingPhones: 60,
+    workingPhones: 3,
   },
   {
     hour: "04:00",
-    workingPhones: 59,
+    workingPhones: 3,
   },
   {
     hour: "05:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
   {
     hour: "06:00",
-    workingPhones: 38,
+    workingPhones: 3,
   },
   {
     hour: "07:00",
-    workingPhones: 32,
+    workingPhones: 3,
   },
   {
     hour: "08:00",
-    workingPhones: 51,
+    workingPhones: 3,
   },
   {
     hour: "09:00",
-    workingPhones: 43,
+    workingPhones: 3,
   },
   {
     hour: "10:00",
-    workingPhones: 42,
+    workingPhones: 3,
   },
   {
     hour: "11:00",
-    workingPhones: 42,
+    workingPhones: 3,
   },
   {
     hour: "12:00",
-    workingPhones: 39,
+    workingPhones: 4,
   },
   {
     hour: "13:00",
-    workingPhones: 61,
+    workingPhones: 5,
   },
   {
     hour: "14:00",
-    workingPhones: 69,
+    workingPhones: 5,
   },
   {
     hour: "15:00",
-    workingPhones: 62,
+    workingPhones: 4,
   },
   {
     hour: "16:00",
-    workingPhones: 62,
+    workingPhones: 4,
   },
   {
     hour: "17:00",
-    workingPhones: 62,
+    workingPhones: 3,
   },
   {
     hour: "18:00",
-    workingPhones: 72,
+    workingPhones: 3,
   },
   {
     hour: "19:00",
-    workingPhones: 60,
+    workingPhones: 3,
   },
   {
     hour: "20:00",
-    workingPhones: 63,
+    workingPhones: 3,
   },
   {
     hour: "21:00",
-    workingPhones: 58,
+    workingPhones: 3,
   },
   {
     hour: "22:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
   {
     hour: "23:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
 ];
 

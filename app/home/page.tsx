@@ -13,19 +13,19 @@ interface card_item {
 const dashboard_items: card_item[] = [
   {
     title: "total phones",
-    value: 72,
+    value: 6,
   },
   {
     title: "working phones",
-    value: 51,
+    value: 3,
   },
   {
     title: "total groups",
-    value: 4,
+    value: 1,
   },
   {
     title: "errors",
-    value: 1,
+    value: 0,
   },
 ];
 

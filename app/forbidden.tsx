@@ -1,6 +1,6 @@
 const Forbidden = () => {
   return (
-    <main className="w-screen h-screen font-sans">
+    <section className="w-screen h-screen font-sans">
       <div className="h-screen text-center flex flex-col items-center justify-center">
         <div>
           <h1 className="inline-block mr-5 pr-6 text-2xl font-medium leading-10 align-top border-r border-slate-500">
@@ -13,7 +13,7 @@ const Forbidden = () => {
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 };
 

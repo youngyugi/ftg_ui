@@ -20,14 +20,8 @@ import { GroupDialog, GroupEditDialog } from "@/components/groups";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { DeleteDialog } from "@/components/utils/deleteDialog";
-/*
-  - i need to create a new group
-  - i need to delete an existing group 
-  - i need to see all the groups
-  - i need to modify group settings (name and settings)
-  - i need to be able to add devices to group
-  - i need to be able to remove devices to a group
-*/
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 
 const data = [
   {
@@ -36,54 +30,30 @@ const data = [
     playlist: "link playlist",
     application: "spotify",
     devices: [
-      "356303486339219",
-      "356303488570811",
-      "356303488150549",
-      "356303480712916",
-      "356303483865141",
-      "356303480942034",
-    ],
-  },
-  {
-    id: 1,
-    name: "group2",
-    playlist: "link playlist",
-    application: "spotify",
-    devices: [
-      "356303486339219",
-      "356303488570811",
-      "356303488150549",
-      "356303480712916",
-      "356303483865141",
-      "356303480942034",
-    ],
-  },
-  {
-    id: 2,
-    name: "group3",
-    playlist: "link playlist",
-    application: "spotify",
-    devices: [
-      "356303486339219",
-      "356303488570811",
-      "356303488150549",
-      "356303480712916",
-      "356303483865141",
-      "356303480942034",
-    ],
-  },
-  {
-    id: 3,
-    name: "group4",
-    playlist: "link playlist",
-    application: "spotify",
-    devices: [
-      "356303486339219",
-      "356303488570811",
-      "356303488150549",
-      "356303480712916",
-      "356303483865141",
-      "356303480942034",
+      {
+        imei: "356209286339219",
+        status: "active",
+      },
+      {
+        imei: "457609388570811",
+        status: "active",
+      },
+      {
+        imei: "758707888150549",
+        status: "not active",
+      },
+      {
+        imei: "502606180712916",
+        status: "active",
+      },
+      {
+        imei: "098208183865141",
+        status: "not active",
+      },
+      {
+        imei: "512300480942034",
+        status: "not active",
+      },
     ],
   },
 ];
@@ -108,7 +78,6 @@ const Groups = async () => {
         {data.map((group) => {
           return (
             <Card className="group p-4" key={group.id}>
-              {/* add edit button that opens a dialog where u can edit group data */}
               <div className="flex justify-between h-10">
                 <div className="capitalize">{group.name}</div>
                 <div className="md:hidden group-hover:block">
@@ -135,18 +104,29 @@ const Groups = async () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-11/12">Name</TableHead>
+                    <TableHead className="w-11/12">Imei</TableHead>
                     <TableHead className="">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {group.devices.map((device) => {
                     return (
-                      <TableRow key={device} className="group/item h-14">
-                        <TableCell className="font-medium">{device}</TableCell>
+                      <TableRow key={device.imei} className="group/item h-14">
+                        <TableCell className="font-medium">
+                          <div className="flex justify-between">
+                            {device.imei}
+                            {device.status === "active" ? (
+                              <CircleCheck color="green" size={20} />
+                            ) : (
+                              <CircleX color="red" size={20} />
+                            )}
+                          </div>
+                        </TableCell>
                         <TableCell>
                           <div className="md:hidden group-hover/item:block">
-                            <DeleteDialog groupId={group.id} itemImei={device}>
+                            <DeleteDialog
+                              groupId={group.id}
+                              itemImei={device.imei}>
                               <AlertDialogTrigger asChild>
                                 <Button
                                   variant="ghost"
