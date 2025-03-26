@@ -27,8 +27,8 @@ const data = [
   {
     id: 0,
     name: "group1",
-    playlist: "link playlist",
-    application: "spotify",
+    contentLink: "link playlist",
+    app: "spotify",
     devices: [
       {
         imei: "356209286339219",
@@ -84,8 +84,8 @@ const Groups = async () => {
                   <GroupEditDialog
                     id={group.id}
                     name={group.name}
-                    app={group.application}
-                    contentLink={group.playlist}>
+                    app={group.app}
+                    contentLink={group.contentLink}>
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="icon">
                         <Pencil />
@@ -124,9 +124,7 @@ const Groups = async () => {
                         </TableCell>
                         <TableCell>
                           <div className="md:hidden group-hover/item:block">
-                            <DeleteDialog
-                              groupId={group.id}
-                              itemImei={device.imei}>
+                            <DeleteDialog url={"/api/group"} data={group}>
                               <AlertDialogTrigger asChild>
                                 <Button
                                   variant="ghost"
