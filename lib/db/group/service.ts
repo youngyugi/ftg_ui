@@ -32,10 +32,12 @@ export const insertGroup = async (request_group: InsertGroup) => {
 };
 
 export const editGroup = async (request_group: UpdateGroup) => {
+  const { id, ...groupWithoutId } = request_group;
+
   const updated_group: DbGroup[] = await db
     .update(group)
-    .set(request_group)
-    .where(eq(group.id, request_group["id"]))
+    .set(groupWithoutId)
+    .where(eq(group.id, id))
     .returning();
 
   console.log("updated group:", updated_group);

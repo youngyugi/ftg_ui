@@ -1,4 +1,10 @@
-import { pgTable, text, foreignKey, integer } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  foreignKey,
+  integer,
+  boolean,
+} from "drizzle-orm/pg-core";
 import group from "../group/schema";
 
 const device = pgTable(
@@ -13,10 +19,11 @@ const device = pgTable(
       cache: 1,
     }),
     name: text().notNull(),
-    app: text(),
-    contentLink: text(),
+    app: text().notNull(),
+    contentLink: text().notNull(),
     groupId: integer(),
     imei: text().primaryKey().notNull(),
+    status: boolean().notNull(),
   },
   (table) => [
     foreignKey({

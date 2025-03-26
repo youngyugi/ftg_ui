@@ -21,6 +21,7 @@ export const insertDevice = async (request_device: InsertDevice) => {
     app: request_device["app"],
     contentLink: request_device["contentLink"],
     groupId: request_device["groupId"],
+    status: false,
   };
 
   const inserted_device: DbDevice[] = await db
@@ -34,10 +35,12 @@ export const insertDevice = async (request_device: InsertDevice) => {
 };
 
 export const editDevice = async (request_device: UpdateDevice) => {
+  const { id, ...deviceWithoutId } = request_device;
+
   const updated_device: DbDevice[] = await db
     .update(device)
-    .set(request_device)
-    .where(eq(device.id, request_device["id"]))
+    .set(deviceWithoutId)
+    .where(eq(device.id, id))
     .returning();
 
   console.log("updated device:", updated_device);

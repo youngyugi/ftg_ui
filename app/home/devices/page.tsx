@@ -6,27 +6,20 @@ import { DeviceDialog } from "@/components/devices";
 import { Button } from "@/components/ui/button";
 import { DialogTrigger } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
-import { Trash } from "lucide-react";
-import { Pencil } from "lucide-react";
-import { CircleCheck } from "lucide-react";
-import { CircleX } from "lucide-react";
 import {
   Table,
   TableHeader,
   TableRow,
   TableHead,
   TableBody,
-  TableCell,
 } from "@/components/ui/table";
-import { DeleteDialog } from "@/components/utils/deleteDialog";
-import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
-import { DeviceEditDialog } from "@/components/devices/deviceEditDialog";
+import { DeviceList } from "@/components/devices";
 
 const data = [
   {
     name: "phone 1",
     imei: "356209286339219",
-    status: "active",
+    status: true,
     app: "inherit",
     group: "group1",
     contentLink: "",
@@ -34,7 +27,7 @@ const data = [
   {
     name: "phone 2",
     imei: "457609388570811",
-    status: "active",
+    status: true,
     app: "inherit",
     group: "group1",
     contentLink: "",
@@ -42,7 +35,7 @@ const data = [
   {
     name: "phone 3",
     imei: "758707888150549",
-    status: "not active",
+    status: false,
     app: "inherit",
     group: "group1",
     contentLink: "",
@@ -50,7 +43,7 @@ const data = [
   {
     name: "phone 4",
     imei: "502606180712916",
-    status: "active",
+    status: true,
     app: "spotify",
     group: "group1",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
@@ -58,7 +51,7 @@ const data = [
   {
     name: "phone 5",
     imei: "098208183865141",
-    status: "not active",
+    status: false,
     app: "spotify",
     group: "group1",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
@@ -66,7 +59,7 @@ const data = [
   {
     name: "phone 6",
     imei: "512300480942034",
-    status: "not active",
+    status: false,
     app: "spotify",
     group: "group1",
     contentLink: "https://www.spotify.com/playlist/u46eiy343i3qw",
@@ -92,7 +85,7 @@ const Devices = async () => {
       <Table className="relative mt-10">
         <TableHeader>
           <TableRow>
-            <TableHead className="hidden md:inline-block">Name</TableHead>
+            <TableHead className="hidden md:table-cell">Name</TableHead>
             <TableHead className="">Imei</TableHead>
             <TableHead className="">Group</TableHead>
             <TableHead className="">Status</TableHead>
@@ -100,53 +93,7 @@ const Devices = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((phone) => {
-            return (
-              <TableRow key={phone.imei} className="group/item h-14">
-                <TableCell className="font-medium md:text-sm hidden md:inline-block">
-                  {phone.name}
-                </TableCell>
-                <TableCell className="font-medium md:text-sm">
-                  {phone.imei}
-                </TableCell>
-                <TableCell className="font-medium md:text-sm">
-                  {phone.group}
-                </TableCell>
-                <TableCell className="font-medium md:text-sm">
-                  {phone.status === "active" ? (
-                    <CircleCheck color="green" size={20} />
-                  ) : (
-                    <CircleX color="red" size={20} />
-                  )}
-                </TableCell>
-                <TableCell className="p-0">
-                  <div className="md:hidden group-hover/item:block">
-                    <DeviceEditDialog
-                      name={phone.name}
-                      imei={phone.imei}
-                      app={phone.app}
-                      contentLink={phone.contentLink}>
-                      <DialogTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                          <Pencil />
-                        </Button>
-                      </DialogTrigger>
-                    </DeviceEditDialog>
-                    <DeleteDialog groupId={0} itemImei={phone.imei}>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="hover:bg-red-200">
-                          <Trash />
-                        </Button>
-                      </AlertDialogTrigger>
-                    </DeleteDialog>
-                  </div>
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          <DeviceList />
         </TableBody>
       </Table>
     </div>

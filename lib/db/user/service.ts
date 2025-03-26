@@ -33,10 +33,12 @@ export const editUser = async (request_user: UpdateUser) => {
       ))
     : null;
 
+  const { id, ...userWithoutId } = request_user;
+
   const updated_user: DbUser[] = await db
     .update(user)
-    .set(request_user)
-    .where(eq(user.id, request_user["id"]))
+    .set(userWithoutId)
+    .where(eq(user.id, id))
     .returning();
 
   console.log("updated user:", updated_user);

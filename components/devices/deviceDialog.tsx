@@ -9,17 +9,22 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-
+import { toast } from "sonner";
+import { InsertDevice } from "@/interfaces/device";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { useState } from "react";
 import { deviceDialogProps } from "@/interfaces/device";
+import axios from "axios";
 
 export const DeviceDialog = ({ children }: deviceDialogProps) => {
   const [name, setName] = useState<string>("");
   const [imei, setImei] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleImeiChange = (imei: string) => {
     setImei(imei);
@@ -29,22 +34,45 @@ export const DeviceDialog = ({ children }: deviceDialogProps) => {
     setName(name);
   };
 
-  const handleSubmit = () => {
-    console.log(imei, name);
+  const handleSubmit = async () => {
+    const data: InsertDevice = {
+      name: name,
+      imei: imei,
+      app: "inherit",
+      contentLink: "",
+      groupId: null,
+      status: false,
+    };
 
-    //to dev api call
-    //POST
-    /* 
-    {
-      id: string (auto generated)
-      name: string (from input label)
-      imei: string (from input label)
+    try {
+      const response = await axios.post("/api/device", data);
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Device: {name} successfuly created</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during device creation</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during device creation</p>
+        </div>
+      );
+    } finally {
+      setOpen(false);
     }
-    */
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

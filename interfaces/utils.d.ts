@@ -1,9 +1,11 @@
 import { JWTPayload } from "jose";
-
+import { DbDevice } from "./device";
+import { DbUser } from "./user";
+import { DbGroup } from "./group";
 export interface deleteDialogProps {
   children: React.ReactElement;
-  groupId: number;
-  itemImei: string;
+  data: DbDevice | DbUser | DbGroup;
+  url: string;
 }
 
 export interface Payload extends JWTPayload {

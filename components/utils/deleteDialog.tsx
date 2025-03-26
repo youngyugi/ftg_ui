@@ -12,21 +12,40 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
-import { useState } from "react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { deleteDialogProps } from "@/interfaces/utils";
-import { hadUnsupportedValue } from "next/dist/build/analysis/get-page-static-info";
+import { toast } from "sonner";
+import axios from "axios";
 
-export const DeleteDialog = ({
-  children,
-  groupId,
-  itemImei,
-}: deleteDialogProps) => {
-  const handleSubmit = () => {
-    console.log(groupId, itemImei);
+export const DeleteDialog = ({ children, data, url }: deleteDialogProps) => {
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.delete(url, { data });
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Item deleted</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during delete of item</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during delete of item</p>
+        </div>
+      );
+    }
   };
+
   return (
     <AlertDialog>
       {children}

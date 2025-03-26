@@ -17,13 +17,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "sonner";
 import { SpotifyIcon } from "@/components/utils/icons";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { useState } from "react";
+import axios from "axios";
+import { UpdateDevice } from "@/interfaces/device";
 
 const apps = [
   {
@@ -35,16 +40,20 @@ const apps = [
 ];
 
 export const DeviceEditDialog = ({
+  id,
   name,
   imei,
   app,
   contentLink,
+  groupId,
+  status,
   children,
 }: deviceEditProps) => {
   const [dialogName, setDialogName] = useState<string>(name);
   const [dialogContentLink, setDialogContentLink] =
     useState<string>(contentLink);
   const [selectedApp, setSelectedApp] = useState<string>(app);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleNameChange = (newName: string) => {
     setDialogName(newName);
@@ -58,19 +67,42 @@ export const DeviceEditDialog = ({
     setDialogContentLink(newContentLink);
   };
 
-  const handleSubmit = () => {
-    console.log(name);
-    /**
-     * PUT /api/v1/groups
-     * {
-     *  "id": integer
-     *  "name": string
-     * }
-     */
+  const handleSubmit = async () => {
+    const data: UpdateDevice = {
+      id: id,
+      app: selectedApp,
+      contentLink: dialogContentLink,
+      name: dialogName,
+    };
+    try {
+      const response = await axios.patch("/api/device", data);
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Device: {name} successfuly updated</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during update of device: {name}</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during update of device: {name}</p>
+        </div>
+      );
+    } finally {
+      setOpen(false);
+    }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
