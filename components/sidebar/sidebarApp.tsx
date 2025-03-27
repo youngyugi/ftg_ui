@@ -20,17 +20,20 @@ import {
 import { url } from "@/interfaces/url";
 import { GroupDialog } from "@/components/groups/groupDialog";
 import { DeviceDialog } from "@/components/devices/deviceDialog";
+import { DialogTrigger } from "@/components/ui/dialog";
+import { SidebarMenuSubButton } from "@/components/ui/sidebar";
+import { Session } from "next-auth";
 
 const urls: url[] = [
   {
     title: "Home",
-    link: "/",
+    link: "/home",
     icon: <House />,
     items: [],
   },
   {
     title: "Metrics",
-    link: "/metrics",
+    link: "/home/metrics",
     icon: <ChartSpline />,
     items: [],
   },
@@ -43,16 +46,21 @@ const urls: url[] = [
         title: "Add a device",
         icon: <Plus />,
         dialog: (
-          <DeviceDialog
-            isSidebar={true}
-            title={"Add a device"}
-            icon={<Plus />}
-          />
+          <DeviceDialog>
+            <SidebarMenuSubButton asChild>
+              <DialogTrigger asChild>
+                <a>
+                  <Plus />
+                  <span>Add a device</span>
+                </a>
+              </DialogTrigger>
+            </SidebarMenuSubButton>
+          </DeviceDialog>
         ),
       },
       {
         title: "Manage devices",
-        link: "/devices",
+        link: "/home/devices",
         icon: <PenLine />,
       },
     ],
@@ -66,19 +74,28 @@ const urls: url[] = [
         title: "Add a group",
         icon: <Plus />,
         dialog: (
-          <GroupDialog isSidebar={true} title={"Add a group"} icon={<Plus />} />
+          <GroupDialog>
+            <SidebarMenuSubButton asChild>
+              <DialogTrigger asChild>
+                <a>
+                  <Plus />
+                  <span>Add a group</span>
+                </a>
+              </DialogTrigger>
+            </SidebarMenuSubButton>
+          </GroupDialog>
         ),
       },
       {
         title: "Manage groups",
-        link: "/groups",
+        link: "/home/groups",
         icon: <PenLine />,
       },
     ],
   },
 ];
 
-const SidebarApp = () => {
+const SidebarApp = ({ session }: { session: Session }) => {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
@@ -88,7 +105,7 @@ const SidebarApp = () => {
         <NavMain urls={urls} />
       </SidebarContent>
       <SidebarFooter>
-        <NavFooter />
+        <NavFooter session={session} />
       </SidebarFooter>
     </Sidebar>
   );

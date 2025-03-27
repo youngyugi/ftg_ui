@@ -8,59 +8,64 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { SidebarMenuSubButton } from "@/components/ui/sidebar";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import { groupDialogProps, InsertGroup } from "@/interfaces/group";
+import axios from "axios";
 
-interface grouDialogProps {
-  isSidebar: boolean;
-  title: string;
-  icon: React.ReactElement;
-}
-
-export const GroupDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
+export const GroupDialog = ({ children }: groupDialogProps) => {
   const [groupName, setGroupName] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleGroupNameChange = (name: string) => {
     setGroupName(name);
   };
 
-  const handleSubmit = () => {
-    console.log(groupName);
+  const handleSubmit = async () => {
+    const data: InsertGroup = {
+      name: groupName,
+      app: "none",
+      contentLink: "",
+    };
 
-    // implement api call to server.
-    // POST
-    /*
-    {
-      "id": integer(auto generated),
-      "name": string(from input label)
+    try {
+      const response = await axios.post("/api/group", data);
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Group: {groupName} successfuly created</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during group creation</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during group creation</p>
+        </div>
+      );
+    } finally {
+      setOpen(false);
     }
-    */
   };
 
   return (
-    <Dialog>
-      {isSidebar ? (
-        <SidebarMenuSubButton asChild>
-          <DialogTrigger asChild>
-            <a>
-              {icon}
-              <span>{title}</span>
-            </a>
-          </DialogTrigger>
-        </SidebarMenuSubButton>
-      ) : (
-        <DialogTrigger asChild>
-          <Button variant="outline">Share</Button>
-        </DialogTrigger>
-      )}
+    <Dialog open={open} onOpenChange={setOpen}>
+      {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add a group</DialogTitle>
@@ -92,7 +97,7 @@ export const GroupDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
           <Button
             type="submit"
             size="default"
-            className="px-3"
+            className="px-3 mb-2"
             onClick={handleSubmit}>
             <span className="sr-only">send</span>
             <SendHorizontal />

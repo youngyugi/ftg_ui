@@ -1,12 +1,10 @@
 import {
   SidebarContent,
-  SidebarGroup,
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
-  SidebarGroupContent,
 } from "@/components/ui/sidebar";
-import { FtgIcon } from "../icon/ftgIcon";
+import { FtgIcon } from "@/components/utils/icons/ftg";
 
 export const NavHeader = () => {
   return (

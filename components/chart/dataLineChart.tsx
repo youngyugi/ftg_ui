@@ -1,6 +1,12 @@
 "use client";
 
-import { AreaChart, Area, XAxis, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from "recharts";
 
 import {
   ChartContainer,
@@ -9,105 +15,102 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-
-
-
 const data = [
   {
     hour: "00:00",
-    workingPhones: 20,
+    workingPhones: 6,
   },
   {
     hour: "01:00",
-    workingPhones: 25,
+    workingPhones: 5,
   },
   {
     hour: "02:00",
-    workingPhones: 31,
+    workingPhones: 4,
   },
   {
     hour: "03:00",
-    workingPhones: 31,
+    workingPhones: 3,
   },
   {
     hour: "04:00",
-    workingPhones: 20,
+    workingPhones: 3,
   },
   {
     hour: "05:00",
-    workingPhones: 22,
+    workingPhones: 3,
   },
   {
     hour: "06:00",
-    workingPhones: 26,
+    workingPhones: 3,
   },
   {
     hour: "07:00",
-    workingPhones: 32,
+    workingPhones: 3,
   },
   {
     hour: "08:00",
-    workingPhones: 36,
+    workingPhones: 3,
   },
   {
     hour: "09:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
   {
     hour: "10:00",
-    workingPhones: 52,
+    workingPhones: 3,
   },
   {
     hour: "11:00",
-    workingPhones: 36,
+    workingPhones: 3,
   },
   {
     hour: "12:00",
-    workingPhones: 40,
+    workingPhones: 4,
   },
   {
     hour: "13:00",
-    workingPhones: 71,
+    workingPhones: 5,
   },
   {
     hour: "14:00",
-    workingPhones: 69,
+    workingPhones: 5,
   },
   {
     hour: "15:00",
-    workingPhones: 72,
+    workingPhones: 4,
   },
   {
     hour: "16:00",
-    workingPhones: 72,
+    workingPhones: 4,
   },
   {
     hour: "17:00",
-    workingPhones: 72,
+    workingPhones: 3,
   },
   {
     hour: "18:00",
-    workingPhones: 72,
+    workingPhones: 3,
   },
   {
     hour: "19:00",
-    workingPhones: 60,
+    workingPhones: 3,
   },
   {
     hour: "20:00",
-    workingPhones: 63,
+    workingPhones: 3,
   },
   {
     hour: "21:00",
-    workingPhones: 58,
+    workingPhones: 3,
   },
   {
     hour: "22:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
   {
     hour: "23:00",
-    workingPhones: 48,
+    workingPhones: 3,
   },
 ];
 
@@ -119,13 +122,12 @@ const chartConfig = {
 
 const DataLineChart = () => {
   return (
-    <ResponsiveContainer >
+    <ResponsiveContainer>
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
         <AreaChart
-          accessibilityLayer 
+          accessibilityLayer
           data={data}
-          margin={{ top: 0, right: 0, bottom: 0, left: -25 }}
-        >
+          margin={{ top: 0, right: 0, bottom: 0, left: -25 }}>
           <Area
             type="monotone"
             dataKey="workingPhones"

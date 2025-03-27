@@ -5,7 +5,7 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarGroupLabel,
-  SidebarGroupContent
+  SidebarGroupContent,
 } from "../../ui/sidebar";
 
 import { type url } from "@/interfaces/url";
@@ -29,7 +29,7 @@ export const NavMain = ({ urls }: { urls: url[] }) => {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ) : (
-                  <CollapsibleMenu url={url} />
+                  <CollapsibleMenu url={url} key={url.title} />
                 )}
               </>
             );

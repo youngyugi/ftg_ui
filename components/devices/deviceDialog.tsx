@@ -8,26 +8,23 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
-
-import { SidebarMenuSubButton } from "@/components/ui/sidebar";
-
+import { toast } from "sonner";
+import { InsertDevice } from "@/interfaces/device";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { useState } from "react";
+import { deviceDialogProps } from "@/interfaces/device";
+import axios from "axios";
 
-interface grouDialogProps {
-  isSidebar: boolean;
-  title: string;
-  icon: React.ReactElement;
-}
-
-export const DeviceDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
+export const DeviceDialog = ({ children }: deviceDialogProps) => {
   const [name, setName] = useState<string>("");
   const [imei, setImei] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleImeiChange = (imei: string) => {
     setImei(imei);
@@ -37,36 +34,46 @@ export const DeviceDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
     setName(name);
   };
 
-  const handleSubmit = () => {
-    console.log(imei, name);
+  const handleSubmit = async () => {
+    const data: InsertDevice = {
+      name: name,
+      imei: imei,
+      app: "inherit",
+      contentLink: "",
+      groupId: null,
+      status: false,
+    };
 
-    //to dev api call
-    //POST
-    /* 
-    {
-      id: string (auto generated)
-      name: string (from input label)
-      imei: string (from input label)
+    try {
+      const response = await axios.post("/api/device", data);
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Device: {name} successfuly created</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during device creation</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during device creation</p>
+        </div>
+      );
+    } finally {
+      setOpen(false);
     }
-    */
   };
 
   return (
-    <Dialog>
-      {isSidebar ? (
-        <SidebarMenuSubButton asChild>
-          <DialogTrigger asChild>
-            <a href="#">
-              {icon}
-              <span>{title}</span>
-            </a>
-          </DialogTrigger>
-        </SidebarMenuSubButton>
-      ) : (
-        <DialogTrigger asChild>
-          <Button variant="outline">Share</Button>
-        </DialogTrigger>
-      )}
+    <Dialog open={open} onOpenChange={setOpen}>
+      {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add a device</DialogTitle>
@@ -104,7 +111,7 @@ export const DeviceDialog = ({ isSidebar, title, icon }: grouDialogProps) => {
           <Button
             type="submit"
             size="default"
-            className="px-3"
+            className="px-3 mb-2"
             onClick={handleSubmit}>
             <span className="sr-only">send</span>
             <SendHorizontal />
