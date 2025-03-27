@@ -12,6 +12,7 @@ export interface deviceDialogProps {
 }
 
 export interface deviceAddDialogProps {
+  groupId: number;
   children: React.ReactElement;
 }
 

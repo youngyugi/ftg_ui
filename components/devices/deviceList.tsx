@@ -63,7 +63,7 @@ export const DeviceList = () => {
                     </Button>
                   </DialogTrigger>
                 </DeviceEditDialog>
-                <DeleteDialog url={"/api/device"} data={phone}>
+                <DeleteDialog url={"/api/device"} data={phone} type={"delete"}>
                   <AlertDialogTrigger asChild>
                     <Button
                       variant="ghost"

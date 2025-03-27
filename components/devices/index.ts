@@ -1,3 +1,3 @@
 export { DeviceDialog } from "./deviceDialog";
-export { DeviceAddDialog } from "./deviceAddDialog";
+export { DeviceEditDialog } from "./deviceEditDialog";
 export { DeviceList } from "./deviceList";

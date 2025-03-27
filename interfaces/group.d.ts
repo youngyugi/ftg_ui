@@ -1,19 +1,15 @@
+export interface Group {
+  name: string;
+  app: string;
+  contentLink: string;
+}
+
 export interface groupDialogProps {
   children: React.ReactNode;
 }
 
-export interface groupEditProps {
-  id: number;
-  name: string;
-  app: string;
-  contentLink: string;
+export interface groupEditProps extends DbGroup {
   children: React.ReactElement;
-}
-
-export interface Group {
-  name: string;
-  app: string;
-  contentLink: string | null;
 }
 
 export interface DbGroup extends Group {
@@ -26,7 +22,7 @@ export interface UpdateGroup {
   id: number;
   name?: string;
   app?: string;
-  contentLink?: string | null;
+  contentLink?: string;
 }
 
 export interface DeleteGroup {

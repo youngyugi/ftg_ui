@@ -6,6 +6,7 @@ export interface deleteDialogProps {
   children: React.ReactElement;
   data: DbDevice | DbUser | DbGroup;
   url: string;
+  type: string;
 }
 
 export interface Payload extends JWTPayload {

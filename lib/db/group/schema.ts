@@ -11,7 +11,7 @@ const group = pgTable("group", {
   }),
   name: text().notNull(),
   app: text().notNull(),
-  contentLink: text(),
+  contentLink: text().notNull(),
 });
 
 export default group;

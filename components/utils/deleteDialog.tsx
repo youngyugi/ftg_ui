@@ -18,31 +18,67 @@ import { CircleX } from "lucide-react";
 import { deleteDialogProps } from "@/interfaces/utils";
 import { toast } from "sonner";
 import axios from "axios";
+import { UpdateDevice } from "@/interfaces/device";
 
-export const DeleteDialog = ({ children, data, url }: deleteDialogProps) => {
+export const DeleteDialog = ({
+  children,
+  data,
+  url,
+  type,
+}: deleteDialogProps) => {
   const handleSubmit = async () => {
-    try {
-      const response = await axios.delete(url, { data });
-      response.status == 200
-        ? toast(
-            <div className="flex">
-              <CircleCheck size={20} className="mr-2" color={"green"} />
-              <p>Item deleted</p>
-            </div>
-          )
-        : toast(
-            <div className="flex">
-              <CircleX size={20} className="mr-2" color={"red"} />
-              <p>Error during delete of item</p>
-            </div>
-          );
-    } catch (error) {
-      toast(
-        <div className="flex">
-          <CircleX size={20} className="mr-2" color={"red"} />
-          <p>Error during delete of item</p>
-        </div>
-      );
+    if (type === "delete") {
+      try {
+        const response = await axios.delete(url, { data });
+        response.status == 200
+          ? toast(
+              <div className="flex">
+                <CircleCheck size={20} className="mr-2" color={"green"} />
+                <p>Item deleted</p>
+              </div>
+            )
+          : toast(
+              <div className="flex">
+                <CircleX size={20} className="mr-2" color={"red"} />
+                <p>Error during delete of item</p>
+              </div>
+            );
+      } catch (error) {
+        toast(
+          <div className="flex">
+            <CircleX size={20} className="mr-2" color={"red"} />
+            <p>Error during delete of item</p>
+          </div>
+        );
+      }
+    } else if (type === "update") {
+      try {
+        const newData: UpdateDevice = {
+          id: data.id,
+          groupId: null,
+        };
+        const response = await axios.patch(url, newData);
+        response.status == 200
+          ? toast(
+              <div className="flex">
+                <CircleCheck size={20} className="mr-2" color={"green"} />
+                <p>Device removed from group</p>
+              </div>
+            )
+          : toast(
+              <div className="flex">
+                <CircleX size={20} className="mr-2" color={"red"} />
+                <p>Error during remove of device from group</p>
+              </div>
+            );
+      } catch (error) {
+        toast(
+          <div className="flex">
+            <CircleX size={20} className="mr-2" color={"red"} />
+            <p>Error during remove of device from group</p>
+          </div>
+        );
+      }
     }
   };
 

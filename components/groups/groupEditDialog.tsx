@@ -1,6 +1,6 @@
 "use client";
 
-import { groupEditProps } from "@/interfaces/group";
+import { groupEditProps, UpdateGroup } from "@/interfaces/group";
 import {
   Dialog,
   DialogClose,
@@ -22,7 +22,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SendHorizontal } from "lucide-react";
+import { CircleCheck } from "lucide-react";
+import { CircleX } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
+import axios from "axios";
 
 export const GroupEditDialog = ({
   id,
@@ -34,6 +38,7 @@ export const GroupEditDialog = ({
   const [groupName, setGroupName] = useState<string>(name);
   const [groupApp, setGroupApp] = useState<string>(app);
   const [groupContentLink, setGroupContentLink] = useState<string>(contentLink);
+  const [open, setOpen] = useState<boolean>(false);
 
   const handleGroupNameChange = (newName: string) => {
     setGroupName(name);
@@ -47,19 +52,42 @@ export const GroupEditDialog = ({
     setGroupContentLink(newContentLink);
   };
 
-  const handleSubmit = () => {
-    console.log(groupName);
-    /**
-     * PUT /api/v1/groups
-     * {
-     *  "id": integer
-     *  "name": string
-     * }
-     */
+  const handleSubmit = async () => {
+    const data: UpdateGroup = {
+      id: id,
+      name: groupName,
+      app: groupApp,
+      contentLink: groupContentLink,
+    };
+    try {
+      const response = await axios.patch("/api/group", data);
+      response.status == 200
+        ? toast(
+            <div className="flex">
+              <CircleCheck size={20} className="mr-2" color={"green"} />
+              <p>Group: {name} successfuly updated</p>
+            </div>
+          )
+        : toast(
+            <div className="flex">
+              <CircleX size={20} className="mr-2" color={"red"} />
+              <p>Error during update of group: {name}</p>
+            </div>
+          );
+    } catch (error) {
+      toast(
+        <div className="flex">
+          <CircleX size={20} className="mr-2" color={"red"} />
+          <p>Error during update of group: {name}</p>
+        </div>
+      );
+    } finally {
+      setOpen(false);
+    }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       {children}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
